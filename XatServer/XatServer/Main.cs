@@ -10,8 +10,8 @@ namespace XatServer
 		public static void Main(string[] args)
 		{
 			Console.WriteLine("Hola, sóc el servidor!");
-			
-			Server servidor = new Server("192.168.130.24", 6969);
+
+            Server servidor = new Server("192.168.130.85", 9898);
 			
 			if (!servidor.Start())
 			{
@@ -23,7 +23,18 @@ namespace XatServer
 				// Escribim tot el que ens envii el client
 				while (true)
 				{
-					Console.WriteLine("El client diu: " + servidor.ReadLine());
+                    try
+                    {
+                        Console.WriteLine("El client diu: " + servidor.ReadLine());
+                    }
+                    catch (Exception)
+                    {
+
+                        Console.WriteLine("El cliente se ha desconectado");
+                        Console.ReadKey(true);
+                        servidor.WaitForAClient();
+                    }
+					
 				}
 				
 				// server.WriteLine("Hi!"); 
