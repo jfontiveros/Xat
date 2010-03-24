@@ -31,7 +31,6 @@ namespace XatServer
                     {
 
                         Console.WriteLine("El cliente se ha desconectado");
-                        Console.ReadKey(true);
                         servidor.WaitForAClient();
                     }
 					
