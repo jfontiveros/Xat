@@ -25,7 +25,7 @@ namespace XatServer
 				{
                     try
                     {
-                        Console.WriteLine("El client diu: " + servidor.ReadLine());
+                        Console.WriteLine("El client " +servidor.ReadLine()+ " diu: " + servidor.ReadLine());
                     }
                     catch (Exception)
                     {

@@ -7,15 +7,23 @@ namespace XatClient
 {
 	class MainClass
 	{
+        
 		public static void Main(string[] args)
 		{
-			Client client = new Client("192.168.130.40", 9898);
+			Client client = new Client("192.168.130.44", 9898);
 			
 			if (client.ConnectToServer())
 			{
-				while (true)
+                bool desconectar = false;
+				while (true && desconectar==false)
 				{
-                    client.WriteLine(Console.ReadLine());
+                    string cad = Console.ReadLine();
+                    if (cad !="disconnect")
+                    {
+                        client.WriteLine(cad);
+                    }
+                    else
+                        desconectar = true;
 					//client.WriteLine("Hola! Sóc el client enviant un missatge!");
 				}
 			}
@@ -29,7 +37,7 @@ namespace XatClient
 		private StreamWriter writerStream;
 		private IPEndPoint server_endpoint;
 		private TcpClient tcpClient;
-		
+        string nombre = "juancarlos@mail.com";
 		public Client(string ip, int port)
 		{
 			IPAddress address = IPAddress.Parse(ip);
@@ -43,7 +51,8 @@ namespace XatClient
 		
 		public void WriteLine(string str)
 		{
-			writerStream.WriteLine(str);
+			writerStream.WriteLine(nombre);
+            writerStream.WriteLine(str);
 			writerStream.Flush();
 		}
 		
@@ -52,7 +61,7 @@ namespace XatClient
 			try
 			{
 				// tcpClient = new TcpClient(server_endpoint);
-                tcpClient = new TcpClient("192.168.130.40", 9898);
+                tcpClient = new TcpClient("192.168.130.44", 9898);
 				
 				netStream = tcpClient.GetStream();
 				readerStream = new StreamReader(netStream);
